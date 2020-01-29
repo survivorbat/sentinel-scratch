@@ -1,0 +1,45 @@
+trigger:
+  paths:
+    include:
+      - Dockerfile
+      - azure-pipelines.yaml
+  branches:
+    include:
+      - master
+      - develop
+
+variables:
+  vmImage: "ubuntu-16.04"
+  tag: $(Build.BuildId)
+  repository: "sentinel-scratch"
+
+stages:
+  - stage: Build
+    displayName: Build Image
+    jobs:
+      - job: Build
+        displayName: Build Image
+        pool:
+          vmImage: $(vmImage)
+        steps:
+          - task: Docker@2
+            displayName: Build
+            inputs:
+              command: build
+              repository: $(repository)
+              tags: $(tag)
+  - stage: Publish
+    displayName: Publish image
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    jobs:
+      - job: Publish
+        displayName: Publish Image
+        pool:
+          vmImage: $(vmImage)
+        steps:
+          - task: Docker@2
+            displayName: Publish
+            inputs:
+              command: publish
+              repository: $(repository)
+              tags: $(tag)
