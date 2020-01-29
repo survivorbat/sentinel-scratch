@@ -34,17 +34,9 @@ stages:
               tags: |
                 $(tag)
                 latest
-  - stage: Publish
-    displayName: Publish image
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-    jobs:
-      - job: Publish
-        displayName: Publish Image
-        pool:
-          vmImage: $(vmImage)
-        steps:
           - task: Docker@2
             displayName: Publish
+            condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
             inputs:
               command: push
               repository: $(repository)
