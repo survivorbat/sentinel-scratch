@@ -17,11 +17,11 @@ variables:
   gid: "1000"
 
 stages:
-  - stage: Build
-    displayName: Build Image
+  - stage: BuildAndPublish
+    displayName: Build and publish Image
     jobs:
-      - job: Build
-        displayName: Build Image
+      - job: BuildAndPublish
+        displayName: Build and Publish image
         pool:
           vmImage: $(vmImage)
         steps:
