@@ -12,6 +12,9 @@ variables:
   vmImage: "ubuntu-16.04"
   tag: $(Build.BuildId)
   repository: "sentinel-scratch"
+  sentinel_version: "0.14.3"
+  uid: "1000"
+  gid: "1000"
 
 stages:
   - stage: Build
@@ -27,6 +30,10 @@ stages:
             inputs:
               command: build
               repository: $(repository)
+              arguments:
+                sentinel_version: $(sentinel_vesion)
+                uid: $(uid)
+                gid: $(gid)
               tags: |
                 $(tag)
                 latest
