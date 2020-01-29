@@ -1,5 +1,7 @@
 # Sentinel Image
 
+![Docker Pulls](https://img.shields.io/docker/pulls/survivorbat/sentinel-scratch)
+
 This repository contains a relatively simple Dockerfile to build a small but practical docker container containing the Sentinel
 framework.
 
