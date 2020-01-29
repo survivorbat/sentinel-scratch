@@ -30,7 +30,7 @@ stages:
             inputs:
               command: build
               repository: $(repository)
-              arguments: --build-arg sentinel_version=$(sentinel_version),uid=$(uid),gid=$(gid)
+              arguments: --build-arg sentinel_version=$(sentinel_version) --build-arg uid=$(uid) --build-arg gid=$(gid)
               tags: |
                 $(tag)
                 latest
