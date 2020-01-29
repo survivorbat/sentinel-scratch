@@ -46,7 +46,7 @@ stages:
           - task: Docker@2
             displayName: Publish
             inputs:
-              command: publish
+              command: push
               repository: $(repository)
               tags: |
                 $(tag)
