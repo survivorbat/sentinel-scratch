@@ -16,6 +16,8 @@ RUN addgroup -g ${gid} sentinel \
 
 FROM scratch
 
+WORKDIR /app
+
 COPY --from=build /etc/ssl/certs /etc/ssl/certs
 COPY --from=build /etc/passwd /etc/group /etc/shadow /etc/
 COPY --from=build --chown=sentinel:sentinel /app/sentinel /bin/sentinel

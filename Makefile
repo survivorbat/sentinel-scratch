@@ -11,4 +11,4 @@ help: ## Show the list of commands
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z0-9\._-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
 build: ## Build the image locally
-	docker build . -t survivorbat/sentinel:development
+	docker build . -t survivorbat/sentinel-scratch:development
