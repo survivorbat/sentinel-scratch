@@ -10,9 +10,10 @@ trigger:
 
 variables:
   vmImage: "ubuntu-16.04"
-  tag: $(Build.BuildId)
+  
   repository: "survivorbat/sentinel-scratch"
-  sentinel_version: "0.14.3"
+  sentinel_version: "0.14.4"
+  tag: $(sentinel_version)
   uid: "1000"
   gid: "1000"
 

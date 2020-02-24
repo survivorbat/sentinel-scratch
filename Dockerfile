@@ -1,6 +1,6 @@
 FROM alpine:3.11.3 AS build
 
-ARG sentinel_version=0.14.3
+ARG sentinel_version=0.14.4
 ARG uid=1000
 ARG gid=1000
 
