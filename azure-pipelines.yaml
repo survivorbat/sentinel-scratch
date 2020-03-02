@@ -23,19 +23,20 @@ stages:
         displayName: Build and Publish image
         pool:
           vmImage: $(vmImage)
-        matrix:
-          v0.14.4:
-            sentinel_version: 0.14.4
-          v0.14.3:
-            sentinel_version: 0.14.3
-          v0.14.2:
-            sentinel_version: 0.14.2
-          v0.14.1:
-            sentinel_version: 0.14.1
-          v0.14.0:
-            sentinel_version: 0.14.0
-          v0.13.1:
-            sentinel_version: 0.13.1
+        strategy:
+          matrix:
+            v0.14.4:
+              sentinel_version: 0.14.4
+            v0.14.3:
+              sentinel_version: 0.14.3
+            v0.14.2:
+              sentinel_version: 0.14.2
+            v0.14.1:
+              sentinel_version: 0.14.1
+            v0.14.0:
+              sentinel_version: 0.14.0
+            v0.13.1:
+              sentinel_version: 0.13.1
         steps:
           - task: Docker@2
             displayName: Build
