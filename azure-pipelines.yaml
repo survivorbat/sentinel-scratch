@@ -12,8 +12,6 @@ variables:
   vmImage: "ubuntu-16.04"
 
   repository: "survivorbat/sentinel-scratch"
-  sentinel_version: "0.14.4"
-  tag: $(sentinel_version)
   uid: "1000"
   gid: "1000"
 
@@ -25,6 +23,19 @@ stages:
         displayName: Build and Publish image
         pool:
           vmImage: $(vmImage)
+        matrix:
+          v0.14.4:
+            sentinel_version: 0.14.4
+          v0.14.3:
+            sentinel_version: 0.14.3
+          v0.14.2:
+            sentinel_version: 0.14.2
+          v0.14.1:
+              sentinel_version: 0.14.1
+          v0.14.0:
+            sentinel_version: 0.14.0
+          v0.13.1:
+            sentinel_version: 0.13.1
         steps:
           - task: Docker@2
             displayName: Build
@@ -33,7 +44,7 @@ stages:
               repository: $(repository)
               arguments: --build-arg sentinel_version=$(sentinel_version) --build-arg uid=$(uid) --build-arg gid=$(gid)
               tags: |
-                $(tag)
+                $(sentinel_version)
                 latest
           - task: Docker@2
             displayName: Publish
@@ -43,5 +54,5 @@ stages:
               command: push
               repository: $(repository)
               tags: |
-                $(tag)
+                $(sentinel_version)
                 latest
