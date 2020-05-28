@@ -25,8 +25,10 @@ stages:
           vmImage: $(vmImage)
         strategy:
           matrix:
-            v0.15.3:
-              sentinel_version: 0.15.3
+            v0.15.5:
+              sentinel_version: 0.15.5
+            v0.15.4:
+              sentinel_version: 0.15.4
         steps:
           - task: Docker@2
             displayName: Build
