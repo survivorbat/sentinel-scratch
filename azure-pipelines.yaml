@@ -1,12 +1,7 @@
 trigger:
-  paths:
+  tags:
     include:
-      - Dockerfile
-      - azure-pipelines.yaml
-  branches:
-    include:
-      - master
-      - develop
+      - "*.*.*"
 
 variables:
   vmImage: "ubuntu-16.04"
@@ -14,6 +9,9 @@ variables:
   repository: "survivorbat/sentinel-scratch"
   uid: "1000"
   gid: "1000"
+
+  # The tag will be the version
+  sentinel_version: $(Build.SourceBranchName)
 
 stages:
   - stage: BuildAndPublish
@@ -23,12 +21,6 @@ stages:
         displayName: Build and Publish image
         pool:
           vmImage: $(vmImage)
-        strategy:
-          matrix:
-            v0.15.5:
-              sentinel_version: 0.15.5
-            v0.15.4:
-              sentinel_version: 0.15.4
         steps:
           - task: Docker@2
             displayName: Build
@@ -40,7 +32,7 @@ stages:
                 $(sentinel_version)
           - task: Docker@2
             displayName: Publish
-            condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+            condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
             inputs:
               containerRegistry: 'DockerHub'
               command: push
